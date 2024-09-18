@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Results</title>
+</head>
+<body>
+    <h1>Video Search Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Video Name</th>
+                <th>URL</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for video in data %}
+            <tr>
+                <td>{{ video.video_name }}</td>
+                <td><a href="{{ video.url }}" target="_blank">{{ video.url }}</a></td>
+                <td>{{ video.score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

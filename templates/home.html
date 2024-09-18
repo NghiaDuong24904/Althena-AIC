@@ -1,0 +1,903 @@
+<html>
+<header>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <title>AIthena team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@700&family=Raleway:wght@700&display=swap" rel="stylesheet">
+
+
+</header>
+
+<body onload="on_load();">
+  <style>
+    * {
+      margin: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background-color: #313638;
+      color: #ffffff;
+    }
+
+    .custom-btn {
+      color: #fff;
+      border-radius: 5px;
+      /* padding: 10px 25px; */
+      font-family: 'Lato', sans-serif;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+      outline: none;
+    }
+
+    .btn-13 {
+      background-color: #89d8d3;
+      background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+      border: none;
+      z-index: 1;
+    }
+
+    .btn-13:after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      border-radius: 5px;
+      background-color: #4dccc6;
+      background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+      box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+      transition: all 0.3s ease;
+    }
+
+    .btn-13:hover {
+      color: #fff;
+    }
+
+    .btn-13:hover:after {
+      top: 0;
+      height: 100%;
+    }
+
+    .btn-13:active {
+      top: 2px;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      background-color: #e0e5ec;
+      ;
+    }
+
+    /* search */
+    .search_container {
+      width: 100%;
+      height: 100px;
+      display: grid;
+      grid-template-columns: auto 439px;
+      border-bottom: 5px solid #4dccc6;
+    }
+
+    .search {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+
+    }
+
+    .search label {
+      position: absolute;
+      font-size: 30px;
+      padding: 10px
+    }
+
+    .search input {
+      width: 96%;
+      height: 50px;
+      border: none;
+      border-radius: 10px;
+      padding-left: 5%;
+      font-size: 20px;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 27px; /* Điều chỉnh khoảng cách từ trên xuống */
+      right: 40px; /* Điều chỉnh khoảng cách từ phải vào */
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Montserrat', 'Poppins', 'Raleway', sans-serif;
+      font-size: 35px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+
+
+    .logo-ai {
+      color: orange; /* Màu cam cho chữ AI */
+    }
+
+    .logo-thena {
+      color: limegreen; /* Màu xanh lá cây cho chữ thena */
+    }
+
+    .group_btn {
+      width: 100%;
+      height: 100%;
+      padding-top: 20px;
+    }
+
+    .group_btn button {
+      width: 130px;
+      height: 50px;
+      border-radius: 10px;
+      margin-right: 3%;
+      color: white;
+      font-size: 20px;
+    }
+
+    /* search */
+
+    .img_path {
+      height: 100%;
+      background-color: #bdc0c5;
+      padding-left: 20px;
+    }
+
+    .img_path label {
+      font-size: 18px;
+    }
+
+    .img_path input {
+      height: 40px;
+      width: 429px;
+      border-radius: 10px;
+      border: none;
+      margin: 5px 10px 0 10px;
+      padding-left: 2%;
+      font-size: 13px;
+    }
+
+    .img_path button {
+      width: 80px;
+      height: 40px;
+      color: white;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .csv {
+      width: 98%;
+      height: 100%;
+      padding-left: 69px;
+      background-color: bdc0c5;
+    }
+
+    .csv label {
+      font-size: 18px;
+    }
+
+    .csv select {
+      width: 80px;
+      height: 40px;
+      border-radius: 10px;
+      border: none;
+      margin: 5px 3px 0 10px;
+      padding-left: 5px;
+      font-size: 13px;
+    }
+
+    .num_querry {
+      background-color: bdc0c5;
+      padding-left: 49px;
+    }
+
+    .num_querry label {
+      font-size: 18px;
+    }
+
+    .num_querry input {
+      width: 45px;
+      height: 40px;
+      border-radius: 10px;
+      border: none;
+      margin: 5px 5px 0 5px;
+      padding-left: 4%;
+      font-size: 13px;
+    }
+
+    .num_querry button {
+      width: 80px;
+      height: 40px;
+      color: white;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+
+    /* selection */
+
+    /* list img */
+    .image {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* list img */
+
+    /* add image button */
+    #div_img {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 20px;
+      background-color: #464e51;
+      margin-left: 235px; /* Thêm thuộc tính này để dịch container sang trái */
+      margin-right: -100px; /* Thêm thuộc tính này để dịch container sang trái */
+      /* height: 120px; 
+                width: 516px; */
+    }
+
+    #div_button {
+      position: absolute; /* Đặt vị trí tuyệt đối để có thể di chuyển */
+      top: 105; /* Căn lên phía trên */
+      left: 0; /* Căn về phía trái */
+      padding: 20px;
+      background-color: #313638;
+      height: 570px; 
+      width: 195px;
+    }
+
+    #div_button input[type="checkbox"] {
+      width: 17px; /* Tăng kích thước chiều rộng của ô tick */
+      height: 17px; /* Tăng kích thước chiều cao của ô tick */
+    }
+
+    #div_button label {
+      font-size: 25px; /* Tăng kích thước chữ */
+    }
+
+    #obj_filter{
+      position: absolute; /* Đặt vị trí tuyệt đối để có thể di chuyển */
+      top: 450; /* Căn lên phía trên */
+      left: 0; /* Căn về phía trái */
+      height: 250px;
+      width: 235px;
+      padding: 0px;
+      background-color: #2d9cc8;
+    }
+
+    #obj_filter h3 {
+      text-align: center;
+    }
+
+    #search-container {
+      position: relative;
+      width: 600%;
+      /* Điều chỉnh để phù hợp với chiều rộng vùng chứa */
+      padding: 10px ;
+    }
+
+    #search {
+      width: 90%;
+      /* Điều chỉnh chiều rộng ô tìm kiếm */
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #suggestions-box {
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      position: absolute;
+      top: 45px;
+      width: 15%;
+      background-color: white;
+      z-index: 1000;
+      display: none;
+    }
+    #selected-items{
+      font-size: 17;
+      color:#ffffff
+    }
+
+    .suggestion-item {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #f9f9f9;
+      color: #313638;
+    }
+
+    .suggestion-item:hover {
+      background-color: #ececec;
+    }
+
+    .container_img_btn {
+      position: relative;
+      width: 100%;
+      max-width: 318px;
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      padding: 0.1%;
+      cursor: pointer;
+      margin: 0; /* Loại bỏ margin để giảm khoảng cách giữa các ảnh */
+    }
+
+    .container_img_btn img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .container_img_btn {
+      position: relative;
+      /* Đảm bảo vị trí của các nút dựa vào container */
+    }
+
+    .container_img_btn .btn_knn {
+      display: none;
+      /* Ẩn nút mặc định */
+      position: absolute;
+      top: 50%;
+      /* Căn giữa theo chiều dọc */
+      left: 10%;
+      /* Vị trí nút bên trái */
+      transform: translateY(-50%);
+      /* Đảm bảo nút ở giữa theo chiều dọc */
+      background-color: #4dccc6;
+      color: white;
+      font-size: 16px;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .container_img_btn .btn_yt {
+      display: none;
+      /* Ẩn nút mặc định */
+      position: absolute;
+      top: 50%;
+      /* Căn giữa theo chiều dọc */
+      right: 10%;
+      /* Vị trí nút bên phải */
+      transform: translateY(-50%);
+      /* Đảm bảo nút ở giữa theo chiều dọc */
+      background-color: #ff0000;
+      color: white;
+      font-size: 16px;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .container_img_btn .btn_c {
+      display: none;
+      /* Ẩn nút mặc định */
+      position: absolute;
+      top: 80%;
+      /* Căn giữa theo chiều dọc */
+      right: 10%;
+      /* Vị trí nút bên phải */
+      transform: translateY(-50%);
+      /* Đảm bảo nút ở giữa theo chiều dọc */
+      background-color: #20ec19;
+      color: white;
+      font-size: 16px;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+
+    /* Hiển thị các nút khi hover vào container */
+    .container_img_btn:hover .btn_knn,
+    .container_img_btn:hover .btn_yt {
+      display: inline-block;
+      /* Hiển thị nút khi di chuột vào */
+    }
+    .container_img_btn:hover .btn_c {
+      display: inline-block;
+      /* Hiển thị nút khi di chuột vào */
+    }
+
+    .container_img_btn .btn_yt:hover {
+      background-color: #a30000;
+    }
+    .container_img_btn .btn_c:hover {
+      background-color: #e4e816;
+    }
+
+    .container_img_btn .btn_select {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      background-color: #4dccc6;
+      color: white;
+      font-size: 16px;
+      padding: 5px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .container_img_btn .btn_knn:hover {
+      background-color: #145552;
+    }
+
+    .container_img_btn .btn_select:hover {
+      background-color: #145552;
+    }
+
+    .container_img_btn img:hover {
+      border: 4px solid #4dccc6;
+    }
+
+    /* .container_img_btn img:focus{hoverImg
+                border: 1px solid blue;
+            } */
+    /* poup */
+    #popup_canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    #popup_fname_div {
+      position: fixed;
+      margin-left: 25%;
+      margin-top: 60%;
+      color: rgb(0, 255, 0);
+      font-size: 30;
+    }
+
+    @supports (display: flex) {
+      @media screen and (min-width: 1024px) {
+        article {
+          display: flex;
+        }
+      }
+    }
+
+    @supports (display: grid) {
+      @media screen and (min-width: 1024px) {
+        article {
+          display: grid;
+        }
+      }
+    }
+  </style>
+  <div class="container">
+    <div class="search_container">
+
+      <div class="logo-container">
+        <a href="/" class="logo">
+          <span class="logo-ai">AI</span><span class="logo-thena">thena</span>
+        </a>
+      </div>
+
+      <div class="search">
+
+        <label for="">  
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </label>
+        <input id="text_query" type="text" placeholder="Text query">
+      </div>
+      <div class="group_btn">
+        <button class="custom-btn btn-13" onclick="search();"> <span>Search</span></button>
+      </div>
+
+    </div>
+
+
+    <!-- <div style="height: 5px; width: 100%; background-color: black; margin-bottom: 5px; margin-top: 5px;"></div> -->
+    <div id="div_img">
+
+    </div>
+
+    <div id="div_button" style="padding: 20px;">
+      <!-- Checkbox faiss -->
+      <input type="checkbox" id="faiss" name="faiss">
+      <label for="faiss">faiss (CLIP model)</label><br><br>
+    
+      <!-- Checkbox OCR -->
+      <input type="checkbox" id="ocr" name="ocr" onclick="toggleTextBox('ocr')">
+      <label for="ocr">OCR</label><br><br>
+    
+      <!-- Checkbox subtitle -->
+      <input type="checkbox" id="subtitle" name="subtitle" onclick="toggleTextBox('subtitle')">
+      <label for="subtitle">Subtitle</label><br><br>
+    
+      <!-- Dynamic Text Boxes -->
+      <div id="text_boxes" style="display: none; margin-top: 10px;">
+        <div id="keyword_container" style="display: none;">
+          <label for="keywords">Keywords:</label>
+          <input type="text" id="keywords" name="keywords"><br><br>
+        </div>
+        <div id="image_count_container" style="display: none;">
+          <label for="num_images">Số hình k:</label>
+          <input type="text" id="num_images" name="num_images"><br><br>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="obj_filter" style="margin-top: 20px;">
+      <h3>Object filter</h3>
+      <div id="search-container">
+          <div id="selected-items"></div> <!-- Vùng hiển thị các mục đã chọn -->
+          <input type="text" id="search" placeholder="Enter keywords..." autocomplete="off"
+            style="width: 15%; margin-bottom: 10px;">
+          <div id="suggestions-box"></div>
+      </div>
+  
+      <!-- Biểu mẫu để gửi dữ liệu về server -->
+      <form action="/filter" method="POST">
+          <!-- Input ẩn để chứa các mục đã chọn -->
+          <input type="hidden" name="selected_items" id="selected-items-input">
+          
+          <button type="submit" id="submit-btn" class="custom-btn btn-13" style="width: 100%;top: 5px">Filter by object</button>
+      </form>
+    </div>
+
+    <div style="height: 5px; width: 100%; background-color: black;"></div> 
+    <div id=" ">
+
+    </div>
+    <div id="div_total_page">Total: 1200 page</div>
+    <div style="margin-bottom: 50px;"></div>
+
+  </div>
+  <script>
+    var data = '{{ data|tojson }}';
+    data = data.replace(/\s/g, '');
+    data = data.replace(/\\/g, '/');
+    data = JSON.parse(data);
+    let btn_knn = document.getElementsByClassName("btn_knn");
+    let btn_select = document.getElementsByClassName("btn_select");
+    let hoverImg = document.getElementsByClassName("hoverImg");
+    // console.log("data: " + JSON.stringify(data))
+
+
+    function toggleTextBox(type) {
+      // Lấy trạng thái của các checkbox
+      const isFaissChecked = document.getElementById('faiss').checked;
+      const isOcrChecked = document.getElementById('ocr').checked;
+      const isSubtitleChecked = document.getElementById('subtitle').checked;
+
+      // Hiển thị các hộp văn bản khi checkbox OCR hoặc Subtitle được chọn
+      if (isOcrChecked || isSubtitleChecked) {
+        document.getElementById('text_boxes').style.display = 'block';
+      } else {
+        document.getElementById('text_boxes').style.display = 'none';
+      }
+
+      // Kiểm tra checkbox faiss và OCR
+      if (isFaissChecked && isOcrChecked) {
+        document.getElementById('keyword_container').style.display = 'block';
+        document.getElementById('image_count_container').style.display = 'block';
+      } else if (isOcrChecked) {
+        document.getElementById('keyword_container').style.display = 'block';
+        document.getElementById('image_count_container').style.display = 'none';
+      } else {
+        document.getElementById('keyword_container').style.display = 'none';
+        document.getElementById('image_count_container').style.display = 'none';
+      }
+
+      // Kiểm tra checkbox faiss và Subtitle
+      if (isFaissChecked && isSubtitleChecked) {
+        document.getElementById('keyword_container').style.display = 'block';
+        document.getElementById('image_count_container').style.display = 'block';
+      } else if (isSubtitleChecked) {
+        document.getElementById('keyword_container').style.display = 'block';
+        document.getElementById('image_count_container').style.display = 'none';
+      }
+    }
+
+
+
+    function add_paging() {
+      console.log(data['num_page']);
+      var url = new URL(window.location.href);
+      var cur_index = parseInt(url.searchParams.get("index"));
+      var imgpath = url.searchParams.get("imgpath");
+      // var labelpath = url.searchParams.get("labelpath");
+      if (cur_index == 'undefined') {
+        cur_index = 0;
+      }
+      var i = cur_index - 4;
+      if (i > 0) {
+        var iDiv = document.createElement('div');
+        iDiv.className = 'page_num';
+        iDiv.innerHTML = "...";
+        document.getElementById("div_page").appendChild(iDiv);
+      }
+      for (i; ((i < data['num_page']) && (i < cur_index + 4)); i++) {
+        if (i < 0) {
+          i = 0;
+        }
+        var iDiv = document.createElement('div');
+        iDiv.className = 'page_num';
+        var iA = document.createElement('a');
+        // iA.href = "?index="+i.toString()+"&imgpath="+imgpath+"&labelpath="+labelpath;
+        iA.href = "?index=" + i.toString() + "&imgpath=" + imgpath;
+        iA.innerHTML = i.toString();
+        if (i == cur_index) {
+          iA.style.color = "green";
+        }
+        iDiv.appendChild(iA);
+        document.getElementById("div_page").appendChild(iDiv);
+      }
+      if (i < data['num_page']) {
+        var iDiv = document.createElement('div');
+        iDiv.className = 'page_num';
+        iDiv.innerHTML = "...";
+        document.getElementById("div_page").appendChild(iDiv);
+      }
+      document.getElementById("div_total_page").innerHTML = "Total: " + data['num_page'].toString() + " page";
+    }
+
+    function add_img(div_id_image) {
+      let div_img = document.getElementById("div_img");
+      let pagefile_list = data['pagefile'];
+
+      pagefile_list.forEach((item, index) => {
+        // console.log('item: ' + JSON.stringify(item))
+        $("#div_img").append(
+          `<div class= "container_img_btn"  onmouseover="mouseOver(${index})" onmouseout="mouseOut(${index})">
+                        <button class="btn_knn" onClick="go_img_search(${item.id})">IR</button>
+                        <button class="btn_yt" onClick="sendItemId('${item.imgpath}')">YT</button>
+                        <button class="btn_c" onClick="get_Answer('${item.imgpath}')">C</button>
+                        <img class="hoverImg" onclick="show_list_segment(${item.id})" src="get_img?fpath=${item.imgpath}">
+                    </div>`
+        );
+      });
+
+    }
+
+    function mouseOver(id) {
+      // console.log('type: ' + typeof(btn_knn))
+      btn_knn[id].style.display = "block";
+      btn_select[id].style.display = "block";
+      document.getElementsByClassName("btn_yt")[id].style.display = "block"; // Hiển thị nút yt
+      document.getElementsByClassName("btn_c")[id].style.display = "block"; // Hiển thị nút yt
+    }
+
+    function mouseOut(id) {
+      btn_knn[id].style.display = "none";
+      btn_select[id].style.display = "none";
+      document.getElementsByClassName("btn_yt")[id].style.display = "none"; // Ẩn nút yt khi mouseout
+      document.getElementsByClassName("btn_c")[id].style.display = "none"; // ấn thị nút yt
+    }
+
+    function go_img_search(id) {
+      window.open("/imgsearch?imgid=" + id);
+    }
+    function sendItemId(imgpath) {
+      const xhr = new XMLHttpRequest();  // Tạo đối tượng XMLHttpRequest
+      xhr.open('POST', '/submit_item', true);  // Định nghĩa endpoint của Python
+      xhr.setRequestHeader('Content-Type', 'application/json');  // Gửi dưới dạng JSON
+
+      const data = JSON.stringify({ imgpath: imgpath });  // Chuẩn bị dữ liệu JSON
+      xhr.send(data);  // Gửi dữ liệu tới backend
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          alert('Response: ' + xhr.responseText);  // Hiển thị phản hồi từ server
+        }
+      };
+    }
+
+    function get_Answer(imgpath) {
+      const xhr = new XMLHttpRequest();  // Tạo đối tượng XMLHttpRequest
+      xhr.open('POST', '/get_Answer', true);  // Định nghĩa endpoint của Python
+      xhr.setRequestHeader('Content-Type', 'application/json');  // Gửi dưới dạng JSON
+
+      const data = JSON.stringify({ imgpath: imgpath });  // Chuẩn bị dữ liệu JSON
+      xhr.send(data);  // Gửi dữ liệu tới backend
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          alert('Response: ' + xhr.responseText);  // Hiển thị phản hồi từ server
+        }
+      };
+    }
+
+
+    function on_load() {
+      var url = new URL(window.location.href);
+      var imgpath = url.searchParams.get("imgpath");
+      if ("query" in data) {
+        document.getElementById("text_query").value = data["query"]
+      }
+      add_paging();
+      add_img("div_img");
+    }
+
+    function show_list_segment(id) {
+      window.open("/showsegment?imgid=" + id);
+    }
+
+    function youtube(youtubeLink) {
+      window.open(youtubeLink);
+    }
+
+  function search() {
+      // Capture the text query
+      text_query = document.getElementById('text_query').value;
+
+      // Get checkbox statuses
+      faissChecked = document.getElementById('faiss').checked;
+      ocrChecked = document.getElementById('ocr').checked;
+      subtitleChecked = document.getElementById('subtitle').checked;
+
+      // Get the number of images if provided
+      const numImages = document.getElementById('num_images').value || 100;
+
+      // Get keywords if OCR or Subtitle is checked
+      let keywords = '';
+      if (ocrChecked || subtitleChecked) {
+        keywords = document.getElementById('keywords').value;
+      }
+
+      if (!faissChecked && !ocrChecked && !subtitleChecked) {
+        faissChecked = true;
+      }
+
+      // Create the query object to send to the backend
+      const searchQuery = {
+        text_query: text_query,
+        faiss: faissChecked,
+        ocr: ocrChecked,
+        subtitle: subtitleChecked,
+        keywords: keywords,
+        num_images: numImages
+      };
+
+      // Send the query as a GET request to the backend
+
+      window.location.href = "/textsearch?" + new URLSearchParams(searchQuery).toString();
+      
+      // window.location.href = "/textsearch?textquery=" + text_query;
+
+
+      document.getElementById('text_query').innerHTML = text_query;
+  }
+
+const search1Input = document.getElementById('search'); 
+const suggestionsBox = document.getElementById('suggestions-box');
+const selectedItemsContainer = document.getElementById('selected-items');
+const submitBtn = document.getElementById('submit-btn');
+let suggestions = [];
+let selectedItems = [];
+
+// Load the suggestions once when the page loads
+function loadSuggestions() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/static/list_object.json', true); // Adjust the path to your file
+  xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      const data = JSON.parse(xhr.responseText);
+      suggestions = data.suggestions; // Store the suggestions in the array
+    } else {
+      console.error('Error loading suggestions:', xhr.statusText);
+    }
+  };
+  xhr.onerror = function () {
+    console.error('Network error');
+  };
+  xhr.send();
+}
+
+// Filter suggestions based on the query
+function filterSuggestions(query) {
+  if (!query) {
+    return [];
+  }
+  return suggestions.filter(suggestion =>
+    suggestion.toLowerCase().startsWith(query.toLowerCase())
+  );
+}
+
+// Display suggestions
+function displaySuggestions(filteredSuggestions) {
+  suggestionsBox.innerHTML = ''; // Clear previous suggestions
+  if (filteredSuggestions.length === 0) {
+    suggestionsBox.style.display = 'none'; // Hide suggestions box if no results
+    return;
+  }
+
+  filteredSuggestions.forEach(suggestion => {
+    const suggestionItem = document.createElement('div');
+    suggestionItem.textContent = suggestion;
+    suggestionItem.classList.add('suggestion-item');
+
+    // On clicking a suggestion
+    suggestionItem.addEventListener('click', () => {
+      if (!selectedItems.includes(suggestion)) {
+        selectedItems.push(suggestion);
+        displaySelectedItems(); // Display selected items
+      }
+      search1Input.value = ''; // Clear search input
+      suggestionsBox.style.display = 'none'; // Hide suggestions box
+    });
+
+    suggestionsBox.appendChild(suggestionItem);
+  });
+
+  suggestionsBox.style.display = 'block'; // Show suggestions box when there are results
+}
+
+// Display selected items
+function displaySelectedItems() {
+  selectedItemsContainer.innerHTML = ''; // Clear previous selections
+
+  selectedItems.forEach(item => {
+    const selectedItemDiv = document.createElement('div');
+    selectedItemDiv.classList.add('selected-item');
+    selectedItemDiv.textContent = item;
+
+    const removeBtn = document.createElement('span');
+    removeBtn.textContent = 'x';
+    removeBtn.classList.add('remove-btn');
+    removeBtn.addEventListener('click', () => {
+      selectedItems = selectedItems.filter(selected => selected !== item);
+      displaySelectedItems(); // Refresh selected items display
+    });
+
+    selectedItemDiv.appendChild(removeBtn);
+    selectedItemsContainer.appendChild(selectedItemDiv);
+  });
+}
+
+// Event listener for search input
+search1Input.addEventListener('input', () => {
+  const query = search1Input.value;
+  const filteredSuggestions = filterSuggestions(query);
+  displaySuggestions(filteredSuggestions);
+});
+
+// Hide suggestions box when clicking outside
+document.addEventListener('click', (event) => {
+  if (!search1Input.contains(event.target) && !suggestionsBox.contains(event.target)) {
+    suggestionsBox.style.display = 'none';
+  }
+});
+
+// Handle form submission
+submitBtn.addEventListener('click', function() {
+  // Gắn các mục đã chọn vào input ẩn trước khi submit form
+  document.getElementById('selected-items-input').value = selectedItems.join(', ');
+});
+
+// Call loadSuggestions when the page loads
+loadSuggestions();
+
+
+  </script>
+</body>
+
+</html>
